@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "CPP_2025_CA1_OA",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "CPP_2025_CA1_OA::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-CPP_2025_CA1_OA-Debug-3f96b047a076bdfbee6b.json",
+					"name" : "CPP_2025_CA1_OA",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/larem/Documents/DKIT/YEAR 2/SEMESTER 2/C++/CPP_2025_CA1_OA/cmake-build-debug",
+		"source" : "C:/Users/larem/Documents/DKIT/YEAR 2/SEMESTER 2/C++/CPP_2025_CA1_OA"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
