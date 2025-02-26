@@ -5,6 +5,8 @@
 
 using namespace std;
 
+void menu();
+
 // Define a struct
 struct Record
 {
@@ -71,4 +73,57 @@ int main()
     }
 
     return 0;
+}
+
+// Created a console-based menu system
+void menu()
+{
+    int choices;
+    bool exit = false;
+    while (!exit)
+    {
+        cout << "Menu:" << endl;
+        cout << "1. " << endl;
+        cout << "2. " << endl;
+        cout << "3. " << endl;
+        cout << "4. " << endl;
+        cout << "5. " << endl;
+        cout << "6. " << endl;
+        cout << "7. " << endl;
+        cout << "8. Exit" << endl;
+        cout << "Enter your choice: " << endl;
+        cin >> choices;
+
+        // Perform actions based on the user's choice
+        switch (choices)
+        {
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+        case 5:
+
+            break;
+        case 6:
+
+            break;
+        case 7:
+
+            break;
+        case 8:
+            exit = true;
+            cout << "Exiting program. Goodbye!" << endl;
+            break;
+        default:
+            // If user enters an invalid option, display an error message
+            cout << "Invalid choice. Please enter numbers between 1-8." << endl;
+        }
+    }
 }
