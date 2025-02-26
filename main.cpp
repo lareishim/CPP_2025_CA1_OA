@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,11 +19,21 @@ struct Record
     string city;
 };
 
+// Function to print a single record
 void print_record(const Record& record)
 {
     cout << "Employee ID: " << record.employee_id << ", Name: " << record.name
         << ", Age: " << record.age << ", Salary: " << record.salary
         << ", Department: " << record.department << ", City: " << record.city << endl;
+}
+
+// Function to display all records
+void display_records(const vector<Record>& records)
+{
+    for (const auto& record : records)
+    {
+        print_record(record);
+    }
 }
 
 int main()
@@ -35,14 +46,13 @@ int main()
     }
 
     string line;
-    Record records[100]; // Array to store records
-    int count = 0;
+    vector<Record> records; // Vector to store records
 
     // Skip the header line
     getline(file, line);
 
     // Read the file line by line
-    while (getline(file, line) && count < 100)
+    while (getline(file, line))
     {
         stringstream ss(line);
         string idStr, name, ageStr, salaryStr, department, city;
@@ -55,22 +65,13 @@ int main()
         getline(ss, salaryStr, ','); // Read Salary
         getline(ss, city, ','); // Read City
 
-        // Store the values in the record
-        records[count].employee_id = stoi(idStr);
-        records[count].name = name;
-        records[count].age = stoi(ageStr);
-        records[count].salary = stod(salaryStr);
-        records[count].department = department;
-        records[count].city = city;
-        count++;
+        // Add record to the vector
+        records.push_back({stoi(idStr), name, stoi(ageStr), stod(salaryStr), department, city});
     }
     file.close();
 
     // Display records
-    for (int i = 0; i < count; i++)
-    {
-        print_record(records[i]);
-    }
+    display_records(records);
 
     return 0;
 }
@@ -98,31 +99,24 @@ void menu()
         switch (choices)
         {
         case 1:
-
             break;
         case 2:
-
             break;
         case 3:
-
             break;
         case 4:
-
+            break;
         case 5:
-
             break;
         case 6:
-
             break;
         case 7:
-
             break;
         case 8:
             exit = true;
             cout << "Exiting program. Goodbye!" << endl;
             break;
         default:
-            // If user enters an invalid option, display an error message
             cout << "Invalid choice. Please enter numbers between 1-8." << endl;
         }
     }
