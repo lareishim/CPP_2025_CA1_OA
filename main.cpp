@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -18,6 +19,14 @@ struct Record
     double salary{};
     string department;
 };
+
+// Helper function to convert a string to lowercase
+// Did research to get this and i now understand it
+string toLowerCase(string str)
+{
+    ranges::transform(str, str.begin(), ::tolower);
+    return str;
+}
 
 // Function to print a single record
 void print_record(const Record& record)
@@ -67,6 +76,37 @@ map<string, int> countByColumn(const vector<Record>& records, const string& colu
         countMap[key]++;
     }
     return countMap;
+}
+
+// Function to display employees based on department
+void displayByDepartment(const vector<Record>& records)
+{
+    if (records.empty())
+    {
+        cout << "No records loaded. Please load records first." << endl;
+        return;
+    }
+    string department;
+    cout << "Enter department to filter by: ";
+    cin >> department;
+
+    // Convert input to lowercase
+    string lowerDept = toLowerCase(department);
+
+    bool found = false;
+    for (const auto& record : records)
+    {
+        if (toLowerCase(record.department) == lowerDept)
+        {
+            print_record(record);
+            found = true;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "No employees found in the " << department << " department." << endl;
+    }
 }
 
 // Function to display counts by column
@@ -172,7 +212,7 @@ void menu()
         cout << "1. Display All Employees " << endl;
         cout << "2. Search Employee by ID " << endl;
         cout << "3. Count by Column " << endl;
-        cout << "4. " << endl;
+        cout << "4. Display employees based on user input" << endl;
         cout << "5. " << endl;
         cout << "6. " << endl;
         cout << "7. " << endl;
@@ -193,7 +233,7 @@ void menu()
             displayCountByColumn(records);
             break;
         case 4:
-
+            displayByDepartment(records);
             break;
         case 5:
 
