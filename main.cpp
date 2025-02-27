@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -16,7 +17,6 @@ struct Record
     int age{};
     double salary{};
     string department;
-    string city;
 };
 
 // Function to print a single record
@@ -47,6 +47,47 @@ int search_by_id(const vector<Record>& records, const int search_id)
         }
     }
     return -1; // Return -1 if not found
+}
+
+// Counts occurrences of unique values in the specified column and returns a map.
+map<string, int> countByColumn(const vector<Record>& records, const string& column)
+{
+    map<string, int> countMap;
+
+    for (const auto& record : records)
+    {
+        string key;
+        if (column == "department")
+            key = record.department;
+        else
+        {
+            cout << "Invalid column name!" << endl;
+            return {};
+        }
+        countMap[key]++;
+    }
+    return countMap;
+}
+
+// Function to display counts by column
+void displayCountByColumn(const vector<Record>& records)
+{
+    if (records.empty())
+    {
+        cout << "No records loaded. Please load records first." << endl;
+        return;
+    }
+
+    string column;
+    cout << "Enter column to count by (department): ";
+    cin >> column;
+
+    map<string, int> countMap = countByColumn(records, column);
+
+    for (const auto& pair : countMap)
+    {
+        cout << pair.first << ": " << pair.second << endl;
+    }
 }
 
 // Function to load and display records
@@ -128,14 +169,14 @@ void menu()
     while (!exit)
     {
         cout << "Menu:" << endl;
-        cout << "1. Display All Employees" << endl;
-        cout << "2. Search Employee by ID" << endl;
-        cout << "3. " << endl;
+        cout << "1. Display All Employees " << endl;
+        cout << "2. Search Employee by ID " << endl;
+        cout << "3. Count by Column " << endl;
         cout << "4. " << endl;
         cout << "5. " << endl;
         cout << "6. " << endl;
         cout << "7. " << endl;
-        cout << "8. Exit" << endl;
+        cout << "8. Exit " << endl;
         cout << "Enter your choice: ";
         cin >> choices;
 
@@ -149,7 +190,7 @@ void menu()
             searchByID(records);
             break;
         case 3:
-
+            displayCountByColumn(records);
             break;
         case 4:
 
