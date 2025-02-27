@@ -24,7 +24,7 @@ void print_record(const Record& record)
 {
     cout << "Employee ID: " << record.employee_id << ", Name: " << record.name
         << ", Age: " << record.age << ", Salary: " << record.salary
-        << ", Department: " << record.department << ", City: " << record.city << endl;
+        << ", Department: " << record.department << endl;
 }
 
 // Function to display all records
@@ -69,7 +69,7 @@ void displayRecords(vector<Record>& records)
     while (getline(file, line))
     {
         stringstream ss(line);
-        string idStr, name, ageStr, salaryStr, department, city;
+        string idStr, name, ageStr, salaryStr, department;
 
         // Read each column in the CSV file
         getline(ss, idStr, ','); // Read Employee ID
@@ -77,10 +77,9 @@ void displayRecords(vector<Record>& records)
         getline(ss, department, ','); // Read Department
         getline(ss, ageStr, ','); // Read Age
         getline(ss, salaryStr, ','); // Read Salary
-        getline(ss, city, ','); // Read City
 
         // Add record to the vector
-        records.push_back({stoi(idStr), name, stoi(ageStr), stod(salaryStr), department, city});
+        records.push_back({stoi(idStr), name, stoi(ageStr), stod(salaryStr), department});
     }
     file.close();
 
