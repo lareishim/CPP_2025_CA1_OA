@@ -45,6 +45,50 @@ void display_records(const vector<Record>& records)
     }
 }
 
+
+// Function to safely get an integer input
+int getValidatedInt(const string& prompt)
+{
+    int value;
+    string line;
+    while (true)
+    {
+        cout << prompt;
+        getline(cin, line); // Read the input as a string
+
+        stringstream ss(line); // Use stringstream to attempt conversion
+        if (ss >> value && ss.eof()) // Ensure the whole string is a valid integer
+        {
+            return value;
+        }
+        else
+        {
+            cout << "Invalid input. Please enter a valid number.\n";
+        }
+    }
+}
+
+// Function to safely get a string input (ensuring it's not numeric)
+string getValidatedString(const string& prompt)
+{
+    string value;
+    while (true)
+    {
+        cout << prompt;
+        getline(cin, value); // Read the whole line
+
+        // Check if the string is empty or consists only of digits
+        if (value.empty() || all_of(value.begin(), value.end(), ::isdigit))
+        {
+            cout << "Invalid input. Please enter a valid string.\n";
+        }
+        else
+        {
+            return value;
+        }
+    }
+}
+
 // Function to search for an employee by ID
 int search_by_id(const vector<Record>& records, const int search_id)
 {
@@ -291,8 +335,23 @@ void menu()
         cout << "6. Search Employee by Name" << endl;
         cout << "7. Display Employee List sorted by Salary" << endl;
         cout << "8. Exit " << endl;
-        cout << "Enter your choice: ";
-        cin >> choices;
+
+        while (true)
+        {
+            cout << "Enter your choice: ";
+            string input;
+            getline(cin, input); // Read the whole line
+
+            stringstream ss(input); // Use stringstream to try converting to an integer
+            if (ss >> choices && ss.eof() && choices >= 1 && choices <= 8)
+            {
+                break; // Valid input, break the loop
+            }
+            else
+            {
+                cout << "Invalid input. Please enter a number between 1 and 8.\n";
+            }
+        }
 
         // Perform actions based on the user's choice
         switch (choices)
@@ -323,7 +382,8 @@ void menu()
             cout << "Exiting program. Goodbye!" << endl;
             break;
         default:
-            cout << "Invalid choice. Please enter a number between 1-4." << endl;
+            cout << "Invalid choice. Please enter a number between 1-8." << endl;
+            break;
         }
     }
 }
