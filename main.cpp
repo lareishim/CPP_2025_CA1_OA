@@ -250,6 +250,22 @@ void searchByName(const vector<Record>& records)
     }
 }
 
+void displaySortedBySalary(vector<Record>& records)
+{
+    if (records.empty())
+    {
+        cout << "No records loaded. Please load records first." << endl;
+        return;
+    }
+
+    sort(records.begin(), records.end(), [](const Record& a, const Record& b)
+    {
+        return a.salary > b.salary;
+    });
+
+    cout << "Employees sorted by salary (descending order):\n";
+    display_records(records);
+}
 
 int main()
 {
@@ -273,7 +289,7 @@ void menu()
         cout << "4. Display employees based on user input" << endl;
         cout << "5. Display the Oldest, youngest employees and average employee age" << endl;
         cout << "6. Search Employee by Name" << endl;
-        cout << "7. " << endl;
+        cout << "7. Display Employee List sorted by Salary" << endl;
         cout << "8. Exit " << endl;
         cout << "Enter your choice: ";
         cin >> choices;
@@ -300,7 +316,7 @@ void menu()
             searchByName(records);
             break;
         case 7:
-
+            displaySortedBySalary(records);
             break;
         case 8:
             exit = true;
