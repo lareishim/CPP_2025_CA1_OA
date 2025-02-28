@@ -219,6 +219,38 @@ void findMinMaxAvgAge(const vector<Record>& records)
     print_record(lowest);
 }
 
+void searchByName(const vector<Record>& records)
+{
+    if (records.empty())
+    {
+        cout << "No records loaded. Please load records first." << endl;
+        return;
+    }
+
+    string searchText;
+    cout << "Enter text to search for in names: ";
+    cin.ignore(); // Ignore leftover newline from previous input
+    getline(cin, searchText); // Allow multi-word input
+
+    searchText = toLowerCase(searchText);
+    bool found = false;
+
+    cout << "Matching records:\n";
+    for (auto it = records.begin(); it != records.end(); ++it)
+    {
+        if (toLowerCase(it->name).find(searchText) != string::npos)
+        {
+            print_record(*it);
+            found = true;
+        }
+    }
+    if (!found)
+    {
+        cout << "No employees found matching " << searchText << ".\n";
+    }
+}
+
+
 int main()
 {
     vector<Record> records;
@@ -240,7 +272,7 @@ void menu()
         cout << "3. Count by Column " << endl;
         cout << "4. Display employees based on user input" << endl;
         cout << "5. Display the Oldest, youngest employees and average employee age" << endl;
-        cout << "6. " << endl;
+        cout << "6. Search Employee by Name" << endl;
         cout << "7. " << endl;
         cout << "8. Exit " << endl;
         cout << "Enter your choice: ";
@@ -265,7 +297,7 @@ void menu()
             findMinMaxAvgAge(records);
             break;
         case 6:
-
+            searchByName(records);
             break;
         case 7:
 
