@@ -193,6 +193,32 @@ void searchByID(const vector<Record>& records)
     }
 }
 
+void findMinMaxAvgAge(const vector<Record>& records)
+{
+    if (records.empty())
+    {
+        cout << "No records available to analyze." << endl;
+        return;
+    }
+    Record highest = records[0];
+    Record lowest = records[0];
+    int totalAge = 0;
+
+    for (const auto& record : records)
+    {
+        if (record.age > highest.age) highest = record;
+        if (record.age < lowest.age) lowest = record;
+        totalAge += record.age;
+    }
+    int avgAge = totalAge / records.size();
+
+    cout << "Average Age: " << avgAge << endl;
+    cout << "Oldest Employee:\n";
+    print_record(highest);
+    cout << "Youngest Employee:\n";
+    print_record(lowest);
+}
+
 int main()
 {
     vector<Record> records;
@@ -213,7 +239,7 @@ void menu()
         cout << "2. Search Employee by ID " << endl;
         cout << "3. Count by Column " << endl;
         cout << "4. Display employees based on user input" << endl;
-        cout << "5. " << endl;
+        cout << "5. Display the Oldest, youngest employees and average employee age" << endl;
         cout << "6. " << endl;
         cout << "7. " << endl;
         cout << "8. Exit " << endl;
@@ -236,7 +262,7 @@ void menu()
             displayByDepartment(records);
             break;
         case 5:
-
+            findMinMaxAvgAge(records);
             break;
         case 6:
 
